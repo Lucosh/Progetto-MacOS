@@ -5,6 +5,7 @@ let package = Package(
     name: "GestionaleFenice",
     platforms: [.macOS(.v14)],
     targets: [
-        .target(name: "FeniceCore")
+        .target(name: "FeniceCore"),
+        .testTarget(name: "FeniceCoreTests", dependencies: ["FeniceCore"])
     ]
 )
