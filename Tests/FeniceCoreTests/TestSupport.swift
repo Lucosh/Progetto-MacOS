@@ -46,4 +46,17 @@ extension FeniceStore {
     func subjectId(named name: String) -> Int {
         db.subjects.first { $0.name == name }!.id
     }
+
+    func makeTestTutor(email: String = "tutor@test.it", teaching subjects: [String]) throws -> User {
+        let created = try mutate { db in
+            FeniceStore.makeUser(
+                in: &db, hasher: hasher, email: email, password: "password1",
+                role: .tutor, firstName: "Giulia", lastName: "Bianchi", date: now()
+            )
+        }
+        for name in subjects {
+            try setTeaches(tutorId: created.id, subjectId: subjectId(named: name), enabled: true)
+        }
+        return user(created.id)!
+    }
 }
