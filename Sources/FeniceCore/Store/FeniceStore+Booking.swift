@@ -79,7 +79,9 @@ extension FeniceStore {
                 body: "\(lessonSubject.name) con \(tutor.fullName), \(Format.dateTime(slot.start)).",
                 at: current
             )
-            return booking
+            // se mancano meno di 12 ore l'addebito parte subito
+            db.runBillingCycle(now: current)
+            return db.bookings.first { $0.id == booking.id } ?? booking
         }
     }
 }
