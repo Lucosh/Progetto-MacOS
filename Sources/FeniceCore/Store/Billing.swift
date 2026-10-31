@@ -75,6 +75,9 @@ extension FeniceStore {
     }
 
     public func transactions(forUser userId: Int) -> [BalanceTransaction] {
-        db.transactions.filter { $0.userId == userId }.sorted { $0.createdAt > $1.createdAt }
+        // a parità di orario conta l'ordine di inserimento (es. addebito e storno nello stesso minuto)
+        db.transactions
+            .filter { $0.userId == userId }
+            .sorted { ($0.createdAt, $0.id) > ($1.createdAt, $1.id) }
     }
 }
