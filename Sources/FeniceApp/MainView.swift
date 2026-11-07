@@ -153,9 +153,9 @@ struct MainView: View {
     @ViewBuilder
     private func detail(for pane: Pane) -> some View {
         switch pane {
-        case .studentHome: PlaceholderView(title: "Le mie lezioni")
-        case .book: PlaceholderView(title: "Prenota")
-        case .balance: PlaceholderView(title: "Saldo")
+        case .studentHome: StudentDashboardView(user: user)
+        case .book: BookingWizardView(user: user)
+        case .balance: BalanceView(user: user)
         case .agenda: PlaceholderView(title: "Agenda")
         case .availability: PlaceholderView(title: "Disponibilità")
         case .tutorCancellations: PlaceholderView(title: "Annullamenti")
