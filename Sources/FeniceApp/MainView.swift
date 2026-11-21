@@ -166,8 +166,8 @@ struct MainView: View {
         case .subjects: SubjectsView(user: user)
         case .adminCancellations: AdminCancellationsView()
         case .adminSettings: AdminSettingsView(user: user)
-        case .notifications: PlaceholderView(title: "Notifiche")
-        case .profile: PlaceholderView(title: "Profilo")
+        case .notifications: NotificationsView(user: user)
+        case .profile: ProfileView(user: user)
         }
     }
 }

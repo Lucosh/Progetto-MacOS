@@ -15,7 +15,7 @@ public protocol PasswordHasher {
 }
 
 public final class FeniceStore {
-    public private(set) var db: AppDatabase
+    public internal(set) var db: AppDatabase
     public var calendar: Calendar
     public var now: () -> Date
 

@@ -17,6 +17,7 @@ final class BookingTests: XCTestCase {
         try store.addAvailability(tutorId: tutor.id, start: date(2026, 10, 14, 15), end: date(2026, 10, 14, 19))
     }
 
+    @discardableResult
     private func book(_ hour: Int, _ minute: Int = 0, duration: Int = 60, note: String = "") throws -> Booking {
         try store.bookLesson(
             studentId: student.id, tutorId: tutor.id, subjectId: math,

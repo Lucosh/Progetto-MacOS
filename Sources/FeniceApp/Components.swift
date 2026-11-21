@@ -77,11 +77,3 @@ struct ToastView: View {
             .padding(.bottom, 24)
     }
 }
-
-struct PlaceholderView: View {
-    let title: String
-
-    var body: some View {
-        ContentUnavailableView(title, systemImage: "hammer", description: Text("Ci sto lavorando."))
-    }
-}
