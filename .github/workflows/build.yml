@@ -1,0 +1,22 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ios:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Versione Xcode
+        run: xcodebuild -version
+      - name: Test del core
+        run: swift test
+      - name: Build dell'app per il simulatore iOS
+        run: >
+          xcodebuild build
+          -project GestionaleFenice.xcodeproj
+          -target GestionaleFenice
+          -sdk iphonesimulator
+          CODE_SIGNING_ALLOWED=NO
