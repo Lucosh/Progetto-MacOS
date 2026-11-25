@@ -20,3 +20,24 @@ jobs:
           -target GestionaleFenice
           -sdk iphonesimulator
           CODE_SIGNING_ALLOWED=NO
+      # .ipa senza firma per iPhone: va firmato al momento dell'installazione (es. Sideloadly con un Apple ID)
+      - name: Build dell'app per iPhone
+        run: >
+          xcodebuild build
+          -project GestionaleFenice.xcodeproj
+          -target GestionaleFenice
+          -sdk iphoneos
+          -configuration Release
+          CODE_SIGNING_ALLOWED=NO
+          CODE_SIGNING_REQUIRED=NO
+          CODE_SIGN_IDENTITY=""
+      - name: Pacchetto .ipa
+        run: |
+          mkdir Payload
+          cp -R build/Release-iphoneos/GestionaleFenice.app Payload/
+          ls Payload/GestionaleFenice.app/Frameworks
+          zip -qr GestionaleFenice.ipa Payload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GestionaleFenice-ipa
+          path: GestionaleFenice.ipa
